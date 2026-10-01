@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tính tháng của năm đó có bao nhiêu ngày</title>
+  </head>
+  <body>
+    <h1>Nhập tháng/năm (MM/yyyy):</h1>
+    <input type="text" name="" id="dateInput" placeholder="Ví dụ: 10/2003" />
+    <button onclick="checkDays()">Kiểm tra</button>
+
+    <p id="result"></p>
+
+    <script>
+      function isLeapYear(year) {
+        //Điều kiện chuẩn: chia hết cho 400 hoặc chia hết cho 4 nhưng không chia hết cho 100
+        return year % 400 === 0 || (year % 4 == 0 && year % 100 !== 0);
+      }
+      function checkDays() {
+        const input = document.getElementById("dateInput").value;
+        const regex = /^(\d{2})\/(\d{4})$/;
+
+        if (!regex.test(input)) {
+          document.getElementById("result").innerText =
+            "Định dạng không hợp lệ!";
+          return;
+        }
+        const parts = input.split("/");
+        const month = parseInt(parts[0], 10);
+        const year = parseInt(parts[1], 10);
+
+        if (month < 1 || month > 12) {
+          document.getElementById("result").innerText = "Tháng không hợp lệ!";
+          return;
+        }
+        let days;
+        switch (month) {
+          case 1:
+          case 3:
+          case 5:
+          case 7:
+          case 8:
+          case 10:
+          case 12:
+            days = 31;
+            break;
+          case 4:
+          case 6:
+          case 9:
+          case 11:
+            days = 30;
+            break;
+          case 2:
+            days = isLeapYear(year) ? 29 : 28;
+            break;
+        }
+        document.getElementById("result").innerText =
+          `${input} có ${days} ngày.`;
+      }
+    </script>
+  </body>
+</html>
