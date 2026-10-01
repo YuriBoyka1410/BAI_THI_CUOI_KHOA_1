@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tính trung bình chia hết cho 3</title>
+  </head>
+  <body>
+    <h2>Nhập mảng số nguyên (tối đa 50 phần tử)</h2>
+    <input type="text" id="inputArray" placeholder="Ví dụ: 1,2,3,4,5" />
+    <button onclick="xuLyMang()">Tính toán</button>
+
+    <h3>Kết quả:</h3>
+    <p id="mang"></p>
+    <p id="ket_qua"></p>
+
+    <script>
+      function xuLyMang() {
+        //Lấy dữ liệu từ ô user nhập từ bàn phím và chuyển sang thành mảng số nguyên
+        let input = document.getElementById("inputArray").value;
+        let arr = input.split(",").map((x) => parseInt(x.trim()));
+
+        //Kiểm tra số phần tử
+        if (arr.length > 50 || arr.length <= 0) {
+          document.getElementById("mang").innerText = "Số phần tử không hợp lệ";
+          document.getElementById("ket_qua").innerText = "";
+          return;
+        }
+        //Hiển thị mảng
+        document.getElementById("mang").innerText =
+          "Mảng vừa nhập: " + arr.join(",");
+
+        //Tính trung bình cộng các số chia hết cho 3
+        let tong = 0;
+        let dem = 0;
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] % 3 === 0) {
+            tong += arr[i];
+            dem++;
+          }
+        }
+        if (dem > 0) {
+          let tbc = tong / dem;
+          document.getElementById("ket_qua").innerText =
+            "Trung bình cộng của các số chia hết cho 3 là: " + tbc;
+        } else {
+          document.getElementById("ket_qua").innerText =
+            "Không có phần tử nào chia hết cho 3.";
+        }
+      }
+    </script>
+  </body>
+</html>
