@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tìm số hoàn hảo</title>
+  </head>
+  <body>
+    <h2>Kiểm tra số hoàn hảo</h2>
+    <input type="number" id="inputNumber" placeholder="Nhập số nguyên dương" />
+    <button onclick="kiemTra()">Kiểm tra</button>
+    <p id="ketQua"></p>
+
+    <script>
+      //Hàm kiểm tra số hoàn hảo
+      function isPerfectNumber(num) {
+        if (num <= 0) return false;
+        let sum = 0;
+        for (let i = 1; i <= num / 2; i++) {
+          if (num % i === 0) {
+            sum += i;
+          }
+        }
+        return sum === num;
+      }
+      function kiemTra() {
+        let n = parseInt(document.getElementById("inputNumber").value);
+        let ket_qua = isPerfectNumber(n);
+        document.getElementById("ketQua").innerText = ket_qua
+          ? n + " là số hoàn hảo."
+          : n + " không phải là số hoàn hảo.";
+      }
+    </script>
+  </body>
+</html>
